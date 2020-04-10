@@ -1,0 +1,25 @@
+node {
+	def app
+
+	stage('Clone repository') {
+		checkout scm
+	}
+
+	stage('Build image') {
+		app = docker.build('0123456789.ecr.eu-west-1.amazonaws.com/mjuuso/example-app')
+	}
+
+	stage('Test') {
+		app.inside {
+			sh 'npm test'
+		}
+	}
+
+	stage('Push image') {
+		docker.withRegistry('https://0123456789.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:my-aws-credentials') {
+			app.push("${env.BRANCH_NAME}-latest")
+			app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")
+		}
+	}
+}
+
