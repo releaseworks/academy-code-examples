@@ -19,8 +19,10 @@ Check the awcli has been configured correctly by running the following command a
 
 
 Download eksctl and move it into /usr/local/bin:
-`curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp`
-`sudo mv /tmp/eksctl /usr/local/bin`
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+```
 
 Check eksctl has installed correctly by running:
 `eksctl version`
