@@ -27,8 +27,12 @@ sudo mv /tmp/eksctl /usr/local/bin
 Check eksctl has installed correctly by running:
 `eksctl version`
 
-Install kubectl with:
-`sudo snap install kubectl`
+Download and install kubectl with:
+```
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+```
 
 And install the aws-iam-authenticator:
 ```
