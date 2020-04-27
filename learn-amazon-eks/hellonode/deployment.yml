@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: hellonode
-          image: releaseworks/hellonode
+          image: releaseworks/hellonode:2241f48
           ports:
             - containerPort: 8000
               protocol: TCP
