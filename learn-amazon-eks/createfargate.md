@@ -12,7 +12,7 @@ This will take a while to complete but once it does check you can communicate wi
 
 Next we will need to set up the Application Load Balancer configuration to allow your applications to be accessible over the internet.
 
-Create an IAM OIDC providor and associate it with your clust:
+Create an IAM OIDC providor and associate it with your cluster:
 ```
 eksctl utils associate-iam-oidc-provider \
     --region eu-west-1 \
