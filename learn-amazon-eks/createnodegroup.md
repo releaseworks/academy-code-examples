@@ -7,7 +7,7 @@ eksctl create cluster \
  --without-nodegroup
 ```
 
-Once that has finished we need to create a managed node group with:
+Once that has finished we need to create a node group with:
 ```
 eksctl create nodegroup \
 --cluster demo-nodegroup \
