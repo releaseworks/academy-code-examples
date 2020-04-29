@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "cluster_name" {
-	default = "eks-cluster"
+	default = "demo-terraform"
 }
 
 variable "map_accounts" {
