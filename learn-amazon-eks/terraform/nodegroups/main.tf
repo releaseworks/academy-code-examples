@@ -6,11 +6,6 @@ provider "aws" {
   version = ">= 2.28.1"
   region  = var.region
 }
-
-provider "random" {
-  version = "~> 2.1"
-}
-
 provider "local" {
   version = "~> 1.2"
 }
@@ -42,12 +37,6 @@ provider "kubernetes" {
 data "aws_availability_zones" "available" {
 }
 
-
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-}
-
 resource "aws_security_group" "worker_group_mgmt_one" {
   name_prefix = "worker_group_mgmt_one"
   vpc_id      = module.vpc.vpc_id
@@ -59,21 +48,6 @@ resource "aws_security_group" "worker_group_mgmt_one" {
 
     cidr_blocks = [
       "10.0.0.0/8",
-    ]
-  }
-}
-
-resource "aws_security_group" "worker_group_mgmt_two" {
-  name_prefix = "worker_group_mgmt_two"
-  vpc_id      = module.vpc.vpc_id
-
-  ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-
-    cidr_blocks = [
-      "192.168.0.0/16",
     ]
   }
 }
@@ -99,7 +73,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
 
-  name                 = "test-vpc"
+  name                 = "eks-demo-vpc"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
@@ -134,9 +108,9 @@ module "eks" {
 
   worker_groups = [
     {
-      name                          = "worker-group-1"
+      name                          = "node-group"
       instance_type                 = "t2.small"
-      additional_userdata           = "echo foo bar"
+      additional_userdata           = ""
       asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
     },
