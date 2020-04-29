@@ -27,10 +27,14 @@ terraform apply
 And type yes when prompted to apply the configuration.
 
 You can try deploying the nodegroup Kubernetes configuration by changing to the `academy-code-examples/learn-amazon-eks/hellonode/nodegroup` folder and running:
-`kubectl apply -f .`
+```
+kubectl apply -f .
+```
 
 To view the application endpoint run:
-`kubectl get svc`
+```
+kubectl get svc
+```
 
 This will display a url with the loadbalancer allowing access to the hellonode application.
 
