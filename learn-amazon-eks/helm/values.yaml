@@ -1,3 +1,5 @@
 ---
 wordpressUsername: releaseworks
-wordpressPassword: academy
+wordpressBlogName: Releaseworks Academy
+image:
+  tag: 5.4.0
