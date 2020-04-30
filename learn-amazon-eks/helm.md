@@ -29,15 +29,16 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
+Navigate to the helm directory in this repository at `academy-code-examples/learn-amazon-eks/helm/`
+
 To install our chart go to the helm example folder and run:
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install wordpress -f values.yaml bitnami/wordpress
 ```
 
-To change the username and password edit the values.yaml file and change the `wordpressUsername` and `wordpressPassword` values. A full list of the configurable values is available in the [bitnami wordpress chart repository.](https://github.com/bitnami/charts/tree/master/bitnami/wordpress)
+To upgrade our application change the image tag to `5.4.1-debian-10-r0`. A full list of the configurable values is available in the [bitnami wordpress chart repository.](https://github.com/bitnami/charts/tree/master/bitnami/wordpress)
 
-Navigate to the helm directory in this repository at `academy-code-examples/learn-amazon-eks/helm/`
 
 To update our installed application we can run
 ```
