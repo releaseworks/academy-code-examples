@@ -42,4 +42,4 @@ Remove your application with:
 `kubectl delete -f .`
 
 Remove the cluster with:
-`eksctl delete cluster --name demo-fargate`
+`eksctl delete cluster --name demo-nodegroup`
