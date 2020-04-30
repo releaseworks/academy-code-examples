@@ -2,4 +2,4 @@
 wordpressUsername: releaseworks
 wordpressBlogName: Releaseworks Academy
 image:
-  tag: 5.4.0
+  tag: 5.4.0-debian-10-r31
