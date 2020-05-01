@@ -1,0 +1,14 @@
+[
+  {
+    "name": "fargate_definition",
+    "image": "${repository_url}",
+    "cpu": 10,
+    "memory": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8000
+      }
+    ]
+  }
+]
