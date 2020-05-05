@@ -1,0 +1,7 @@
+variable "name" {
+
+}
+
+variable "service" {
+
+}

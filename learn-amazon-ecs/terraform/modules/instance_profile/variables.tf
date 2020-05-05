@@ -1,8 +1,0 @@
-variable "name" {
-  
-}
-
-variable "role" {
-  
-}
-
