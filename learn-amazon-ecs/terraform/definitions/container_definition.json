@@ -1,0 +1,15 @@
+[
+  {
+    "name": "${definition_name}",
+    "image": "${repository_url}",
+    "cpu": 10,
+    "memory": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": ${container_port},
+        "hostPort": ${host_port}
+      }
+    ]
+  }
+]

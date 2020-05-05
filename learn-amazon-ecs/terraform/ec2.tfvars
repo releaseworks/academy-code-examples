@@ -1,0 +1,17 @@
+app_name          = "hellonode"
+launch_type       = "EC2"
+vpc_cidr          = "10.0.0.0/16"
+tg_port           = 80
+tg_type           = "instance"
+tg_protocol       = "HTTP"
+role_service      = "ec2.amazonaws.com"
+ecs_policy        = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+max_instance_size = 3
+min_instance_size = 1
+network_mode      = "bridge"
+cpu               = 256
+memory            = 512
+instance_type     = "t2.micro"
+desired_tasks     = 1
+container_port    = 8000
+host_port         = 80
