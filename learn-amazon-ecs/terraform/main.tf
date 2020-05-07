@@ -36,7 +36,7 @@ module "ecs_service" {
   container_name  = "${var.app_name}-${var.launch_type}"
   container_port  = var.container_port
   # Change this local variable to ec2_network_config when creating an EC2 cluster
-  network_config  = local.fargate_network_config
+  network_config  = local.ec2_network_config
   http_listener   = module.http_listener.arn
 }
 
@@ -85,38 +85,38 @@ module "ec2_egress_sg_rule" {
 }
 
 # EC2 modules
-# module "instance_role" {
-#   source  = "./modules/ecs/iam"
-#   name    = var.app_name
-#   service = var.role_service
-# }
+module "instance_role" {
+  source  = "./modules/ecs/iam"
+  name    = var.app_name
+  service = var.role_service
+}
 
-# module "ecs_policy" {
-#   source     = "./modules/ecs/role_policy_attachment"
-#   role       = module.instance_role.name
-#   policy_arn = var.ecs_policy
-# }
+module "ecs_policy" {
+  source     = "./modules/ecs/role_policy_attachment"
+  role       = module.instance_role.name
+  policy_arn = var.ecs_policy
+}
 
-# module "instance_profile" {
-#   source = "./modules/ecs/instance_profile"
-#   name   = "${var.app_name}-instance-profile"
-#   role   = module.instance_role.name
-# }
+module "instance_profile" {
+  source = "./modules/ecs/instance_profile"
+  name   = "${var.app_name}-instance-profile"
+  role   = module.instance_role.name
+}
 
-# module "ec2_instances" {
-#   source               = "./modules/ecs/asg"
-#   name                 = var.app_name
-#   vpc_zones            = module.vpc.private_subnet_ids
-#   max_size             = var.max_instance_size
-#   min_size             = var.min_instance_size
-#   config_name          = var.app_name
-#   image_id             = data.aws_ami.amz_image.id
-#   public_address       = var.public_address
-#   instance_type        = var.instance_type
-#   user_data            = data.template_file.user_data.rendered
-#   iam_instance_profile = module.instance_profile.name
-#   security_groups      = [module.ecs_sg.id]
-# }
+module "ec2_instances" {
+  source               = "./modules/ecs/asg"
+  name                 = var.app_name
+  vpc_zones            = module.vpc.private_subnet_ids
+  max_size             = var.max_instance_size
+  min_size             = var.min_instance_size
+  config_name          = var.app_name
+  image_id             = data.aws_ami.amz_image.id
+  public_address       = var.public_address
+  instance_type        = var.instance_type
+  user_data            = data.template_file.user_data.rendered
+  iam_instance_profile = module.instance_profile.name
+  security_groups      = [module.ecs_sg.id]
+}
 
 
 # VPC modules
