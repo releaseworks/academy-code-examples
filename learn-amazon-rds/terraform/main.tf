@@ -29,6 +29,39 @@ resource "aws_security_group" "db-sg" {
   }
 }
 
+resource "aws_security_group" "ec2-sg" {
+  name        = "ec2-sg"
+  description = "allow internal database traffic"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    description = "http from the internet"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ingress {
+    description = "ssh from the internet"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }  
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "db-sg"
+  }
+}
+
 # VPC for our wordpress deployment
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -129,4 +162,24 @@ module "db" {
       ]
     },
   ]
+}
+
+module "ec2" {
+  source                 = "terraform-aws-modules/ec2-instance/aws"
+  version                = "~> 2.0"
+
+  name                   = "wordpress"
+  instance_count         = 1
+
+  ami                    = "ami-ebd02392"
+  instance_type          = "t2.micro"
+  key_name               = "user1"
+  monitoring             = true
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  subnet_id              = module.vpc.public_subnets.1
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
 }
