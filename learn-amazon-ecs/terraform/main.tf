@@ -26,7 +26,7 @@ module "task_definition" {
 }
 
 module "ecs_service" {
-  source          = "./modules/ecs/service_fargate"
+  source          = "./modules/ecs/service"
   name            = "${var.app_name}-${var.launch_type}-service"
   cluster         = module.ecs_cluster.id
   task_definition = module.task_definition.arn
@@ -35,7 +35,9 @@ module "ecs_service" {
   lb_target_group = module.target_group.arn
   container_name  = "${var.app_name}-${var.launch_type}"
   container_port  = var.container_port
-  network_config  = local.fargate_network_config
+  # Change this local variable to ec2_network_config when creating an EC2 cluster
+  network_config  = local.ec2_network_config
+  http_listener   = module.http_listener.arn
 }
 
 module "task_execution_role" {
