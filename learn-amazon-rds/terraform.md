@@ -28,7 +28,7 @@ replacing $YOUR_PUBLIC_IP_ADDRESS with the public ip address of your EC2 instanc
 Install Wordpress's dependencies:
 ```
 sudo apt update
-sudo apt install nginx mariadb-server mariadb-client php-fpm php-mysql
+sudo apt install nginx php-fpm php-mysql
 ```
 
 Configure nginx by editing `/etc/nginx/sites-available/wordpress` so it looks like
