@@ -1,4 +1,9 @@
-version: '3'
+version: '3.8'
+networks:
+  hellonet:
+    name: hellonet
+    driver: bridge
+    
 services:
   nginx: 
     image: nginx:latest
@@ -7,9 +12,13 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
+    networks:
+      - hellonet
       
   hellonode:
     image: releaseworks/hellonode:f51b051
     container_name: hellonode
     expose:
       - "8000"
+    networks:
+     - hellonet
