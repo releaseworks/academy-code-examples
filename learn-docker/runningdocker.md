@@ -12,6 +12,10 @@ To kill the container we can use:
 ```
 docker kill hellodaemon
 ```
+And remove it from our system using:
+```
+docker rm hellodaemon
+```
 
 To run the container again exposing port 8000 on our local machine run:
 ```
@@ -25,7 +29,10 @@ curl localhost:8000
 
 We should see the output `hello www.releaseworksacademy.com`
 
-When we're finished we can kill the container in the same way with:
+When we're finished we can kill and remove the container in the same way with:
 ```
-docker kill hellodaemon
+docker kill exposed-daemon && docker rm exposed-daemon
 ```
+
+
+
